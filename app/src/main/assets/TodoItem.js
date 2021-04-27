@@ -1,7 +1,7 @@
 export default {
   template: `
     <div class="border border-blue-500 p-2 my-2">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <span class="flex items-center">
         <input @input="handleCheck" class="w-6 h-6 flex-none" type="checkbox" :checked="item.done">
         <h3 class="ml-2 text-xl">{{ index }}. {{ item.title }}</h3>
