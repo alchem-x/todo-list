@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TODO_LIST = "file:///android_asset/index.html";
+    private static final String TODO_LIST = "file:///android_asset/index-standalone.html";
 
     private WebView webView;
 
