@@ -7,7 +7,9 @@ export default {
       <div class="p-4 max-w-sm mx-auto">
       <h2 class="text-2xl">待办事项（{{ todoList.length }}）</h2>
       <TodoItem v-for="(it, index) of todoList" :key="it.title"
-                @delete="handleDeleteTodo" @check="handleCheckTodo" :index="index + 1"
+                @delete="handleDeleteTodo" 
+                @select="handleSelectTodo"
+                @check="handleCheckTodo" :index="index + 1"
                 :item="it" />
       <Toolbar @add="handleAddTodo" />
       </div>
@@ -35,13 +37,27 @@ export default {
                 if (index + 1 === ev.index) {
                     return {
                         ...it,
-                        done: ev.checked
+                        done: ev.checked,
                     }
                 } else {
                     return { ...it }
                 }
             })
             saveTodoList(this.todoList)
-        }
+        },
+        handleSelectTodo(ev) {
+            this.todoList = this.todoList.map((it, index) => {
+                if (index + 1 === ev.index) {
+                    return {
+                        ...it,
+                        selected: ev.selected,
+                    }
+                } else {
+                    return { ...it }
+                }
+            })
+            saveTodoList(this.todoList)
+        },
+        
     },
 }
