@@ -2,16 +2,17 @@ package alchemy.works.todo;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.webkit.*;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.webkit.WebViewAssetLoader;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TODO_LIST = "file:///android_asset/index_standalone.html";
+    private static final String TODO_LIST = "https://appassets.androidplatform.net/assets/index_standalone.html";
 
     private WebView webView;
 
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.initWebView();
 
-        // LOCAL RESOURCE
         this.getWebView().loadUrl(TODO_LIST);
     }
 
@@ -38,14 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
-        WebView webView = this.findViewById(R.id.mainWebView);
-        // settings
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setAllowUniversalAccessFromFileURLs(true);
-        //
-        this.webView = webView;
+        this.webView = this.findViewById(R.id.mainWebView);
+        WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
+                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
+                .build();
+        this.webView.setWebViewClient(new WebViewClient() {
+            @Nullable
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                return assetLoader.shouldInterceptRequest(request.getUrl());
+            }
+        });
+        this.webView.getSettings().setJavaScriptEnabled(true);
+        this.webView.getSettings().setDomStorageEnabled(true);
     }
 
     private WebView getWebView() {

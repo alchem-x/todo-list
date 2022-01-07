@@ -2,7 +2,7 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
@@ -15,13 +15,12 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 tasks {
     register<Delete>("clean") {
         delete(rootProject.buildDir)
-
     }
 }
