@@ -4,14 +4,14 @@ plugins {
 
 android {
     compileSdk = 31
-    buildToolsVersion = "30.0.2"
 
     defaultConfig {
         applicationId = "alchemy.works.todo"
         minSdk = 28
         targetSdk = 30
-        versionCode = 5
-        versionName = "1.0.3"
+        versionCode = 6
+        versionName = "1.0.6"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,6 +24,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
