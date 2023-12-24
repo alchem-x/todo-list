@@ -19,11 +19,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         this.setContentView(R.layout.activity_main);
-
         this.initWebView();
-
         this.getWebView().loadUrl(TODO_LIST);
     }
 
@@ -54,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private WebView getWebView() {
-        return Objects.requireNonNull(this.webView, "this.webView is null");
+        return Objects.requireNonNull(this.webView, "webView is null");
     }
 }
